@@ -22,7 +22,8 @@ class FilamentCheckWhoisWidgetPlugin implements Plugin
     public Closure | int $quantityPerRow = 1;
 
     public Closure | string $title = '';
-    public Closure | string $description= '';
+
+    public Closure | string $description = '';
 
     public function getId(): string
     {

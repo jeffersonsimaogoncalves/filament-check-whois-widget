@@ -51,6 +51,7 @@ class CheckWhoisWidget extends Widget
                 'favicon' => null,
             ];
         }
+
         return [
             'domain' => $domain,
             'is_valid' => true,
@@ -62,17 +63,18 @@ class CheckWhoisWidget extends Widget
         ];
     }
 
-    private function parseDate(string $date): false|Carbon
+    private function parseDate(string $date): false | Carbon
     {
         if (strlen($date) === 8) {
             return Carbon::createFromFormat('Ymd', $date);
         }
+
         return Carbon::createFromTimeString($date);
     }
 
     private function getFaviconByDomain(string $domain): ?string
     {
-        if (!Str::contains($domain, ['http://', 'https://'])) {
+        if (! Str::contains($domain, ['http://', 'https://'])) {
             $domain = 'https://' . $domain;
         }
 
