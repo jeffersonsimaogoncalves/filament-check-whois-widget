@@ -16,13 +16,6 @@ You can install the package via composer:
 composer require jeffersonsimaogoncalves/filament-check-whois-widget
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="filament-check-whois-widget-migrations"
-php artisan migrate
-```
-
 You can publish the config file with:
 
 ```bash
@@ -43,9 +36,38 @@ return [
 ```
 
 ## Usage
+Add in AdminPanelProvider.php
 
 ```php
+use JeffersonSimaoGoncalves\FilamentCheckWhoisWidget\FilamentCheckWhoisWidgetPlugin;
 
+->plugins([
+    FilamentCheckWhoisWidgetPlugin::make()
+        ->domains([
+            'laravel.com',
+            'filamentphp.com',
+            'github.com'
+        ])
+])
+```
+
+Optionally, you can add more configs as example below:
+
+```php
+use JeffersonSimaoGoncalves\FilamentCheckWhoisWidget\FilamentCheckWhoisWidgetPlugin;
+
+FilamentCheckWhoisWidgetPlugin::make()
+    ->domains([
+        'laravel.com',
+        'filamentphp.com',
+        'github.com'
+    ])
+    ->shouldShowTitle(false) // Optional show title default is: true
+    ->setTitle('Whois') // Optional
+    ->setDescription('Whois detail')  // Optional
+    ->setQuantityPerRow(1) //Optional quantity per row default is: 1
+    ->setColumnSpan('full') //Optional column span default is: '1/2' 
+    ->setSort(10)
 ```
 
 ## Testing
