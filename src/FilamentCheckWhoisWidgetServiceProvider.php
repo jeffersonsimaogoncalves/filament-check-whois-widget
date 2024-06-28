@@ -45,10 +45,6 @@ class FilamentCheckWhoisWidgetServiceProvider extends PackageServiceProvider
             $package->hasConfigFile();
         }
 
-        if (file_exists($package->basePath('/../database/migrations'))) {
-            $package->hasMigrations($this->getMigrations());
-        }
-
         if (file_exists($package->basePath('/../resources/lang'))) {
             $package->hasTranslations();
         }
@@ -75,18 +71,6 @@ class FilamentCheckWhoisWidgetServiceProvider extends PackageServiceProvider
 
         // Icon Registration
         FilamentIcon::register($this->getIcons());
-
-        // Handle Stubs
-        if (app()->runningInConsole()) {
-            foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
-                $this->publishes([
-                    $file->getRealPath() => base_path("stubs/filament-check-whois-widget/{$file->getFilename()}"),
-                ], 'filament-check-whois-widget-stubs');
-            }
-        }
-
-        // Testing
-        Testable::mixin(new TestsFilamentCheckWhoisWidget());
     }
 
     protected function getAssetPackageName(): ?string
@@ -99,11 +83,7 @@ class FilamentCheckWhoisWidgetServiceProvider extends PackageServiceProvider
      */
     protected function getAssets(): array
     {
-        return [
-            // AlpineComponent::make('filament-check-whois-widget', __DIR__ . '/../resources/dist/components/filament-check-whois-widget.js'),
-            Css::make('filament-check-whois-widget-styles', __DIR__ . '/../resources/dist/filament-check-whois-widget.css'),
-            Js::make('filament-check-whois-widget-scripts', __DIR__ . '/../resources/dist/filament-check-whois-widget.js'),
-        ];
+        return [];
     }
 
     /**
@@ -111,9 +91,7 @@ class FilamentCheckWhoisWidgetServiceProvider extends PackageServiceProvider
      */
     protected function getCommands(): array
     {
-        return [
-            FilamentCheckWhoisWidgetCommand::class,
-        ];
+        return [];
     }
 
     /**
@@ -145,8 +123,6 @@ class FilamentCheckWhoisWidgetServiceProvider extends PackageServiceProvider
      */
     protected function getMigrations(): array
     {
-        return [
-            'create_filament-check-whois-widget_table',
-        ];
+        return [];
     }
 }
