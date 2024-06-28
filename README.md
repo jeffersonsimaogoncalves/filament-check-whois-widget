@@ -32,6 +32,7 @@ This is the contents of the published config file:
 
 ```php
 return [
+    'ip2_whois_api_key' => env('CHECK_WHOIS_API_KEY'),
 ];
 ```
 
@@ -44,9 +45,7 @@ use JeffersonSimaoGoncalves\FilamentCheckWhoisWidget\FilamentCheckWhoisWidgetPlu
 ->plugins([
     FilamentCheckWhoisWidgetPlugin::make()
         ->domains([
-            'laravel.com',
-            'filamentphp.com',
-            'github.com'
+            'filamentphp.com'
         ])
 ])
 ```
@@ -58,9 +57,7 @@ use JeffersonSimaoGoncalves\FilamentCheckWhoisWidget\FilamentCheckWhoisWidgetPlu
 
 FilamentCheckWhoisWidgetPlugin::make()
     ->domains([
-        'laravel.com',
-        'filamentphp.com',
-        'github.com'
+        'filamentphp.com'
     ])
     ->shouldShowTitle(false) // Optional show title default is: true
     ->setTitle('Whois') // Optional
