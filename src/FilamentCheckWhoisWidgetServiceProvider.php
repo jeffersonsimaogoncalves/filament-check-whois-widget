@@ -27,8 +27,6 @@ class FilamentCheckWhoisWidgetServiceProvider extends PackageServiceProvider
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->publishConfigFile()
-                    ->publishMigrations()
-                    ->askToRunMigrations()
                     ->askToStarRepoOnGitHub('jeffersonsimaogoncalves/filament-check-whois-widget');
             });
 

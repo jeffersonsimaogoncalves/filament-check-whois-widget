@@ -1,6 +1,6 @@
 <?php
 
-// translations for JeffersonSimaoGoncalves/FilamentCheckWhoisWidget
 return [
-    //
+    'title' => 'WHOIS',
+    'description' => 'List of whois to check details',
 ];
