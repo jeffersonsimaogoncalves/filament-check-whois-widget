@@ -37,7 +37,7 @@ class CheckWhoisWidget extends Widget
         $ip2whois = new Api($config);
 
         foreach ($domains as $domain) {
-            $this->domainWhois[] = Cache::remember("filament-check-whois-widget-$domain", 2592000, fn() => $this->getWhois($ip2whois, $domain));
+            $this->domainWhois[] = Cache::remember("filament-check-whois-widget-$domain", 2592000, fn () => $this->getWhois($ip2whois, $domain));
         }
     }
 
@@ -90,7 +90,7 @@ class CheckWhoisWidget extends Widget
         return $plugin->getSort() ?? -1;
     }
 
-    public function getColumnSpan(): int|string|array
+    public function getColumnSpan(): int | string | array
     {
         $plugin = Filament::getCurrentPanel()?->getPlugin('filament-check-whois-widget');
 
