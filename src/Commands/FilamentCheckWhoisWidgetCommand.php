@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace JeffersonSimaoGoncalves\FilamentCheckWhoisWidget\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class FilamentCheckWhoisWidgetCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'filament-check-whois-widget';
 
     public $description = 'My command';
 

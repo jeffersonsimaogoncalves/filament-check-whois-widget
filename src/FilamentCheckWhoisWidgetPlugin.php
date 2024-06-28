@@ -1,15 +1,15 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace JeffersonSimaoGoncalves\FilamentCheckWhoisWidget;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 
-class SkeletonPlugin implements Plugin
+class FilamentCheckWhoisWidgetPlugin implements Plugin
 {
     public function getId(): string
     {
-        return 'skeleton';
+        return 'filament-check-whois-widget';
     }
 
     public function register(Panel $panel): void
