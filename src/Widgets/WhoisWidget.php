@@ -28,14 +28,11 @@ class WhoisWidget extends Widget
         }
 
         foreach ($domains as $domain) {
-            $this->whois[] = Cache::remember("filament-check-whois-widget-$domain", 2592000, fn() => $this->getWhois($domain));
+            $this->whois[] = Cache::remember("filament-check-whois-widget-$domain", 2592000, fn () => $this->getWhois($domain));
         }
     }
 
-    private function getWhois(string $domain): array
-    {
-
-    }
+    private function getWhois(string $domain): array {}
 
     public static function getSort(): int
     {
@@ -44,7 +41,7 @@ class WhoisWidget extends Widget
         return $plugin->getSort() ?? -1;
     }
 
-    public function getColumnSpan(): int|string|array
+    public function getColumnSpan(): int | string | array
     {
         $plugin = Filament::getCurrentPanel()?->getPlugin('filament-check-whois-widget');
 
