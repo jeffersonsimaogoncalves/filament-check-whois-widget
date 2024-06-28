@@ -9,12 +9,12 @@ use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
+use JeffersonSimaoGoncalves\FilamentCheckWhoisWidget\Commands\FilamentCheckWhoisWidgetCommand;
+use JeffersonSimaoGoncalves\FilamentCheckWhoisWidget\Testing\TestsFilamentCheckWhoisWidget;
 use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use JeffersonSimaoGoncalves\FilamentCheckWhoisWidget\Commands\FilamentCheckWhoisWidgetCommand;
-use JeffersonSimaoGoncalves\FilamentCheckWhoisWidget\Testing\TestsFilamentCheckWhoisWidget;
 
 class FilamentCheckWhoisWidgetServiceProvider extends PackageServiceProvider
 {
