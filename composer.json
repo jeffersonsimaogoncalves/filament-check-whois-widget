@@ -43,6 +43,11 @@
             "JeffersonSimaoGoncalves\\FilamentCheckWhoisWidget\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "JeffersonSimaoGoncalves\\FilamentCheckWhoisWidget\\Tests\\": "tests/"
+        }
+    },
     "scripts": {
         "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
         "analyse": "vendor/bin/phpstan analyse",
