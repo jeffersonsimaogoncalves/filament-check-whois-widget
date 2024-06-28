@@ -1,6 +1,6 @@
 <?php
 
-namespace Joaopaulolndev\FilamentGeneralSettings\Tests;
+namespace JeffersonSimaoGoncalves\FilamentCheckWhoisWidget\Tests;
 
 use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
@@ -13,7 +13,7 @@ use Filament\Support\SupportServiceProvider;
 use Filament\Tables\TablesServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Joaopaulolndev\FilamentGeneralSettings\FilamentGeneralSettingsServiceProvider;
+use JeffersonSimaoGoncalves\FilamentCheckWhoisWidget\FilamentCheckWhoisWidgetServiceProvider;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
@@ -25,7 +25,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Joaopaulolndev\\FilamentGeneralSettings\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
+            fn (string $modelName) => 'JeffersonSimaoGoncalves\\FilamentCheckWhoisWidget\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
     }
 
@@ -44,17 +44,12 @@ class TestCase extends Orchestra
             SupportServiceProvider::class,
             TablesServiceProvider::class,
             WidgetsServiceProvider::class,
-            FilamentGeneralSettingsServiceProvider::class,
+            FilamentCheckWhoisWidgetServiceProvider::class,
         ];
     }
 
     public function getEnvironmentSetUp($app)
     {
         config()->set('database.default', 'testing');
-
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_filament-general-settings_table.php.stub';
-        $migration->up();
-        */
     }
 }
