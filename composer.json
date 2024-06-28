@@ -21,7 +21,9 @@
     ],
     "require": {
         "php": "^8.2",
+        "ashallendesign/favicon-fetcher": "^3.5",
         "filament/filament": "^3.0",
+        "ip2whois/ip2whois-php": "^2.2",
         "spatie/laravel-package-tools": "^1.15.0"
     },
     "require-dev": {

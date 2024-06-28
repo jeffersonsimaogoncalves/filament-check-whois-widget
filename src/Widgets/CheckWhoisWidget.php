@@ -3,13 +3,19 @@
 namespace JeffersonSimaoGoncalves\FilamentCheckWhoisWidget\Widgets;
 
 use AllowDynamicProperties;
+use AshAllenDesign\FaviconFetcher\Facades\Favicon;
+use Carbon\Carbon;
+use Exception;
 use Filament\Facades\Filament;
 use Filament\Widgets\Widget;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
+use IP2WHOIS\Api;
+use IP2WHOIS\Configuration;
 
 #[AllowDynamicProperties]
-class WhoisWidget extends Widget
+class CheckWhoisWidget extends Widget
 {
     protected static bool $isLazy = false;
 
@@ -27,14 +33,54 @@ class WhoisWidget extends Widget
             $domains = $plugin->getDomains();
         }
 
+        $config = new Configuration(config('filament-check-whois-widget.ip2_whois_api_key'));
+        $ip2whois = new Api($config);
+
         foreach ($domains as $domain) {
-            $this->whois[] = Cache::remember("filament-check-whois-widget-$domain", 2592000, fn() => $this->getWhois($domain));
+            $this->domainWhois[] = Cache::remember("filament-check-whois-widget-$domain", 2592000, fn() => $this->getWhois($ip2whois, $domain));
         }
     }
 
-    private function getWhois(string $domain): array
+    private function getWhois(Api $ip2whois, string $domain): array
     {
+        $whois = $ip2whois->lookup($domain);
+        if (property_exists($whois, 'error')) {
+            return [
+                'domain' => $domain,
+                'is_valid' => false,
+                'favicon' => null,
+            ];
+        }
+        return [
+            'domain' => $domain,
+            'is_valid' => true,
+            'create_date' => property_exists($whois, 'create_date') ? $this->parseDate($whois->create_date) : null,
+            'update_date' => property_exists($whois, 'update_date') ? $this->parseDate($whois->update_date) : null,
+            'expire_date' => property_exists($whois, 'expire_date') ? $this->parseDate($whois->expire_date) : null,
+            'domain_age' => property_exists($whois, 'domain_age') ? $whois->domain_age : null,
+            'favicon' => $this->getFaviconByDomain($domain),
+        ];
+    }
 
+    private function parseDate(string $date): false|Carbon
+    {
+        if (strlen($date) === 8) {
+            return Carbon::createFromFormat('Ymd', $date);
+        }
+        return Carbon::createFromTimeString($date);
+    }
+
+    private function getFaviconByDomain(string $domain): ?string
+    {
+        if (!Str::contains($domain, ['http://', 'https://'])) {
+            $domain = 'https://' . $domain;
+        }
+
+        try {
+            return Favicon::fetch($domain)?->cache(now()->addDay())->getFaviconUrl() ?? null;
+        } catch (Exception $ignored) {
+            return null;
+        }
     }
 
     public static function getSort(): int
@@ -69,21 +115,21 @@ class WhoisWidget extends Widget
         return $plugin->getShouldShowTitle();
     }
 
-    public function title()
+    public function title(): ?string
     {
         $plugin = Filament::getCurrentPanel()?->getPlugin('filament-check-whois-widget');
 
         return $plugin->getTitle();
     }
 
-    public function description()
+    public function description(): ?string
     {
         $plugin = Filament::getCurrentPanel()?->getPlugin('filament-check-whois-widget');
 
         return $plugin->getDescription();
     }
 
-    public function quantityPerRow()
+    public function quantityPerRow(): ?int
     {
         $plugin = Filament::getCurrentPanel()?->getPlugin('filament-check-whois-widget');
 
